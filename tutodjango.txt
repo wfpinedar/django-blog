@@ -10,7 +10,7 @@ pip install virtualenv
 
 python -m virtualenv myvenv
 
-# Este comando anterior creará un directorio llamado myvenv que un entorno virtual 
+# Este comando anterior creará un directorio llamado myvenv que un entorno virtual
 # Todo lo que queda es iniciarlo ejecutando el siguiente comando:
 
 myvenv\Scripts\activate
@@ -19,22 +19,22 @@ myvenv\Scripts\activate
 
 source myvenv/bin/activate
 
-Se sabe que esta activado el virtualenv cuando la linea del prompt cambia asi: 
+# Se sabe que esta activado el virtualenv cuando la linea del prompt cambia asi:
+#
+# (myvenv) C:
+#
+# o:
+#
+# (myvenv) ~/$
 
-(myvenv) C:
+# ¡Osea cuando el prefijo (myvenv) aparece!
 
-o:
-
-(myvenv) ~/$
-
-¡Osea cuando el prefijo (myvenv) aparece!
-
-# Con el virtualenv virtualenv iniciado, puedes instalar Django usando pip. 
-# En la consola, ejecuta 
+# Con el virtualenv virtualenv iniciado, puedes instalar Django usando pip.
+# En la consola, ejecuta
 
 pip install django==1.8
 
-Para que se vea mas bonito jejeje (sacado de: http://django-marcador.keimlink.de/en/install_django.html)
+# Para que se vea mas bonito jejeje (sacado de: http://django-marcador.keimlink.de/en/install_django.html)
 
 pip install pytz django-crispy-forms
 
@@ -42,11 +42,11 @@ pip install pytz django-crispy-forms
 ########## CREANDO UN NUEVO PROYECTO CON DJANGO ##########################
 ##########################################################################
 
-Estando con el virtualenv activado en la consola debes ejecutar:
+# Estando con el virtualenv activado en la consola debes ejecutar:
 
 django-admin startproject mysite .
 
-o 
+# o
 
 django-admin.py startproject mysite .
 
@@ -61,20 +61,20 @@ TIME_ZONE = 'America/Bogota'
 
 STATIC_URL = '/static/'
 
-# Debe quedar asi: 
+# Debe quedar asi:
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-esto se hace con el fin de agregar una ruta para los archivos estáticos.
+# esto se hace con el fin de agregar una ruta para los archivos estáticos.
 
 
 #################### Configurar una base de datos ########################
 
-Hay una gran variedad de opciones de bases de datos para almacenar los datos de tu sitio.
-Utilizar el que viene por defecto, sqlite3.
-
-Esto ya está configurado en esta parte del archivo mysite/settings.py:
+# Hay una gran variedad de opciones de bases de datos para almacenar los datos de tu sitio.
+# Utilizar el que viene por defecto, sqlite3.
+#
+# Esto ya está configurado en esta parte del archivo mysite/settings.py:
 
 DATABASES = {
 	'default': {
@@ -83,57 +83,58 @@ DATABASES = {
 	}
 }
 
-# Para crear una base de datos para un blog, ejecurar lo siguiente en la consola: 
-
-python manage.py migrate 
-
-(necesario estar en el directorio que contiene el archivo manage.py). 
-
-Si eso va bien, deberías ver algo así:
+# Para crear una base de datos para un blog, ejecurar lo siguiente en la consola:
 
 python manage.py migrate
-Operations to perform:
-  Apply all migrations: admin, contenttypes, auth, sessions
-Running migrations:
-  Applying contenttypes.0001_initial... OK
-  Applying auth.0001_initial... OK
-  Applying admin.0001_initial... OK
-  Applying sessions.0001_initial... OK
-  
-¡Y listo! ¡Es hora de iniciar el servidor web y ver si el sitio web está funcionando!
 
-Debe estar en el directorio que contiene el archivo manage.py
+#(necesario estar en el directorio que contiene el archivo manage.py).
 
-En la consola, iniciar el servidor web ejecutando 
+# Si eso va bien, deberías ver algo así:
+
+# python manage.py migrate
+
+# Operations to perform:
+#   Apply all migrations: admin, contenttypes, auth, sessions
+# Running migrations:
+#   Applying contenttypes.0001_initial... OK
+#   Applying auth.0001_initial... OK
+#   Applying admin.0001_initial... OK
+#   Applying sessions.0001_initial... OK
+#
+# ¡Y listo! ¡Es hora de iniciar el servidor web y ver si el sitio web está funcionando!
+#
+# Debe estar en el directorio que contiene el archivo manage.py
+#
+# En la consola, iniciar el servidor web ejecutando
 
 python manage.py runserver
 
-y acceder a: 
-
-http://127.0.0.1:8000/
-
-Para detenerlo basta con la combinacion de teclas CTRL + c
+# y acceder a:
+#
+# http://127.0.0.1:8000/
+#
+# Para detenerlo basta con la combinacion de teclas CTRL + c
 
 ############ Creando una aplicación #############
 
-En este tutorial se creo un blog el cual tiene posts que a su vez se compone de: 
-
-Post
---------
-title
-text
-author
-created_date
-published_date
-
-Se crea entonces la aplicación blog dentro del proyecto con la siguiente instrucción: 
-
+# En este tutorial se creo un blog el cual tiene posts que a su vez se compone de:
+#
+# Post
+# --------
+# title
+# text
+# author
+# created_date
+# published_date
+#
+# Se crea entonces la aplicación blog dentro del proyecto con la siguiente instrucción:
+#
 python manage.py startapp blog
-
-Después de crear una aplicación también hay que decirle a Django que debe utilizarla. 
-Se hace en el archivo mysite/settings.py. 
-Encontrar INSTALLED_APPS y añadir una línea que contenga 'blog', justo por encima de ). 
-El producto final debe tener este aspecto:
+#
+# Después de crear una aplicación también hay que decirle a Django que debe utilizarla.
+# Se hace en el archivo mysite/settings.py.
+# Encontrar INSTALLED_APPS y añadir una línea que contenga 'blog', justo por encima de ).
+# El producto final debe tener este aspecto:
 
     INSTALLED_APPS = (
         'django.contrib.admin',
@@ -144,7 +145,7 @@ El producto final debe tener este aspecto:
         'django.contrib.staticfiles',
         'blog',
     )
-	
+
 ### Creando el modelo Post
 
 
@@ -168,72 +169,70 @@ class Post(models.Model):
 
 	def __str__(self):
 		return self.title
-		
-# Ahora definir las propiedades del modelo Post: 
-title, text, created_date, published_date y author
 
-models.CharField - así es como defines un texto con un número limitado de caracteres.
-models.TextField - esto es para textos largos sin un límite. Será ideal para el contenido de un post, ¿verdad?
-models.DateTimeField - esto es fecha y hora.
-modelos.ForeignKey - este es un vínculo con otro modelo.
+# Ahora definir las propiedades del modelo Post:
+# title, text, created_date, published_date y author
+#
+# models.CharField - así es como defines un texto con un número limitado de caracteres.
+# models.TextField - esto es para textos largos sin un límite. Será ideal para el contenido de un post, ¿verdad?
+# models.DateTimeField - esto es fecha y hora.
+# modelos.ForeignKey - este es un vínculo con otro modelo.
 
 ######## Crear tablas para los modelos en tu base de datos
 
-El último paso es añadir nuestro nuevo modelo a nuestra base de datos. 
-Primero tenemos que hacer que Django sepa que tenemos algunos cambios en nuestro modelo 
-(acabamos de crearlo), escribe 
+# El último paso es añadir nuestro nuevo modelo a nuestra base de datos.
+# Primero tenemos que hacer que Django sepa que tenemos algunos cambios en nuestro modelo
+# (acabamos de crearlo), escribe
 
 python manage.py makemigrations blog
 
-Se verá así:
+# Se verá así:
+#
+# (myvenv) ~/djangogirls$ python manage.py makemigrations blog
+# Migrations for 'blog':
+#   0001_initial.py:
+#   - Create model Post
+#
+# Django preparará un archivo de migración que tenemos que aplicar
+# ahora a nuestra base de datos escribiendo
 
-(myvenv) ~/djangogirls$ python manage.py makemigrations blog
-Migrations for 'blog':
-  0001_initial.py:
-  - Create model Post
-  
-Django preparará un archivo de migración que tenemos que aplicar 
-ahora a nuestra base de datos escribiendo 
+python manage.py migrate blog
 
-python manage.py migrate blog 
-
-El resultado debe ser:
-
-(myvenv) ~/djangogirls$ python manage.py migrate blog
-Operations to perform:
-  Apply all migrations: blog
-Running migrations:
-  Applying blog.0001_initial... OK
-  
-Para agregar, editar y borrar los posts que hemos modelado, utilizaremos el administrador de Django.
-
-Vamos a abrir el archivo blog/admin.py y reemplazar su contenido con esto:
+# El resultado debe ser:
+#
+# (myvenv) ~/djangogirls$ python manage.py migrate blog
+# Operations to perform:
+#   Apply all migrations: blog
+# Running migrations:
+#   Applying blog.0001_initial... OK
+#
+# Para agregar, editar y borrar los posts que hemos modelado, utilizaremos el administrador de Django.
+#
+# Vamos a abrir el archivo blog/admin.py y reemplazar su contenido con esto:
 
 from django.contrib import admin
 from .models import Post
 
 admin.site.register(Post)
 
-Luego de guardar se inicia el servidor y visitamos la dirección: 
-
-http://127.0.0.1:8000/admin/
-
-En esta pagina aparece el Django administration solicitando:
-
-Username: 
-Password:
-
-Pero como aun no se ha definido ningún usuario es necesario hacerlo primer, 
-por que para poder ingresar es necesario crear un superusuario que es
-un usuario que tiene control sobre todo lo que hay en el sitio. 
-
-Para esto se usan las siguientes ordenes: 
-
-python manage.py createsuperuser
-Username: admin
-Email address: admin@admin.com
-Password:
-Password (again):
-Superuser created successfully.
-
-
+# Luego de guardar se inicia el servidor y visitamos la dirección:
+#
+# http://127.0.0.1:8000/admin/
+#
+# En esta pagina aparece el Django administration solicitando:
+#
+# Username:
+# Password:
+#
+# Pero como aun no se ha definido ningún usuario es necesario hacerlo primer,
+# por que para poder ingresar es necesario crear un superusuario que es
+# un usuario que tiene control sobre todo lo que hay en el sitio.
+#
+# Para esto se usan las siguientes ordenes:
+#
+# python manage.py createsuperuser
+# Username: admin
+# Email address: admin@admin.com
+# Password:
+# Password (again):
+# Superuser created successfully.
